@@ -17,10 +17,10 @@ mongoose.connect(url)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
-
-
 routes(app);
+
+
+app.use(express.static('public'));
 
 app.get('/', (req, res)=>{
     res.send("MY FIST APP IS RUNNING ON PORT " + PORT);
