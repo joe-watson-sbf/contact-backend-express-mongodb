@@ -2,7 +2,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import routes from './src/routes/crmRoutes';
+import routes from './src/routes/routes';
+
+
+
 
 const app = express();
 const PORT = 4000;
@@ -17,13 +20,21 @@ mongoose.connect(process.env.DATABASE_URL)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
+
 routes(app);
 
 
 app.use(express.static('public'));
 
+
 app.get('/', (req, res)=>{
-    res.send("SERVER RUNNING ON PORT " + PORT);
+    const response = {
+        'greetingMessage': 'WELCOME TO CONTACT SERVICE',
+        'serverStatus': 'SERVER RUNNING ON PORT',
+        PORT
+    };
+    res.send(response);
 })
 
 app.listen(PORT, ()=>{
